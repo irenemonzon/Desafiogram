@@ -16,7 +16,8 @@ export const Login = () => {
     const { email, password } = formValues
     try {
       const response = await login({ email, password })
-      console.log('response', response)
+      const data = await response.json()
+      console.log('data', data)
     } catch (err) {
       setErrorMessage('Usuario o contraseña no coinciden')
     }

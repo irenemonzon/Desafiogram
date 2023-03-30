@@ -21,7 +21,8 @@ export const SignUp = () => {
     const { email, password, nombre, username, bio } = formValues
     try {
       const response = await signup({ email, password, nombre, username, bio })
-      console.log('response', response)
+      const data = await response.json()
+      console.log('data', data)
     } catch (err) {
       console.log('error')
     }
