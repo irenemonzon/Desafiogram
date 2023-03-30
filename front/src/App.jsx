@@ -1,8 +1,8 @@
-import { Login } from './components/Login'
+import { AppRouter } from './AppRouter'
 
 function App () {
   return (
-    <Login />
+    <AppRouter />
   )
 }
 

@@ -5,20 +5,25 @@ import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import { login } from '../services/Login.services'
+import { signup } from '../services/SignUp.services'
 
-export const Login = () => {
-  const [formValues, setFormValues] = useState({ email: '', password: '' })
-  const [errorMessage, setErrorMessage] = useState('')
-
+export const SignUp = () => {
+  const [formValues, setFormValues] = useState({
+    email: '',
+    password: '',
+    nombre: '',
+    username: '',
+    bio: ''
+  })
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const { email, password } = formValues
+    console.log('envia registro nuevo')
+    const { email, password, nombre, username, bio } = formValues
     try {
-      const response = await login({ email, password })
+      const response = await signup({ email, password, nombre, username, bio })
       console.log('response', response)
     } catch (err) {
-      setErrorMessage('Usuario o contraseña no coinciden')
+      console.log('error')
     }
   }
   const handleChange = (e) => {
@@ -36,18 +41,49 @@ export const Login = () => {
             alignItems='center'
           >
             <Grid item xs={12}>
-              <Typography variant='h2' gutterBottom>
+              <Typography variant='h2'>
                 Desafiogram
+              </Typography>
+              <Typography variant='h6' gutterBottom>
+                Registrate para que veas el clon de instagram
               </Typography>
             </Grid>
 
             <Grid item xs={12}>
               <TextField
+                fullWidth
                 label='Email'
                 id='email'
                 name='email'
                 onChange={handleChange}
-                value={formValues.email}
+                required
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                label='Nombre'
+                id='nombre'
+                name='nombre'
+                onChange={handleChange}
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label='Username'
+                id='username'
+                name='username'
+                onChange={handleChange}
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label='Descripción'
+                id='bio'
+                name='bio'
+                onChange={handleChange}
                 required
               />
             </Grid>
@@ -62,21 +98,14 @@ export const Login = () => {
                 required
               />
             </Grid>
-            {errorMessage !== '' && <p>{errorMessage}</p>}
             <Grid item xs={12}>
-              <Button
-                type='submit'
-                fullWidth
-                variant='contained'
-              >
-                Login
-              </Button>
+              <Button type='submit' fullWidth variant='contained'> Sign Up </Button>
             </Grid>
             <Grid item xs={12}>
               <Typography variant='h6' gutterBottom>
-                No tienes cuenta ?
-                <Link to='/signup'>
-                  <Button>  Signup </Button>
+                Ya tienes cuenta?
+                <Link to='/login'>
+                  <Button>  Login </Button>
                 </Link>
 
               </Typography>
